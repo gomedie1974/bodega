@@ -13,7 +13,7 @@ def listar_empleados(request):
     }
     http_response = render(
         request=request,
-        template_name='lista_empleados.html',
+        template_name='control_empleados/lista_empleados.html',
         context=contexto,
     )
     return http_response
