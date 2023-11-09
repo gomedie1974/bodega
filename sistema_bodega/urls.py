@@ -26,7 +26,7 @@ urlpatterns = [
     
     
 
-    path("", saludar_con_html),
+    path("", saludar_con_html, name='inicio'),
 
  
 ]
