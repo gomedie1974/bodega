@@ -30,7 +30,14 @@ class Jefe(models.Model):
     fecha_nacimiento = models.DateField(null=True, blank=True)
     profesion = models.CharField(max_length=128)
     bio = models.TextField(blank=True, null=True)
-
+    
+class Vinos(models.Model):
+    Bodega = models.CharField(max_length=256)
+    nombre = models.CharField(max_length=256)
+    cepa = models.CharField(max_length=256)
+    uva = models.CharField(max_length=32)
+    fecha_nacimiento = models.DateField(null=True, blank=True)
+    bio = models.TextField(blank=True, null=True)
 
 class Premio(models.Model):
     nombre = models.CharField(max_length=256)

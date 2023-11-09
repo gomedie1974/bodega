@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<form method="post">
+  {% csrf_token %}
+  <p>Nombre de la bodega</p>
+  <input type="text" name="nombre">
+  <p>Código</p>
+  <input type="number" name="codigo" step="1">
+  <input type="submit" value="Enviar">
+</form>
+{% endblock contenido %}

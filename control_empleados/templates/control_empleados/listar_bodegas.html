@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>Bodega MITO - Inicio</title>
+{% endblock titulo %}
+
+{% block contenido %} 
+    <h1>
+        Listado de Bodegas {{jefe}}
+    </h1>
+    
+     <ul>
+        {% for bodega in bodegas %}
+        <li>
+            {{bodega.nombre}}, {{bodega.codigo}}
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock contenido %}

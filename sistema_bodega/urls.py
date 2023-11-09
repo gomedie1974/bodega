@@ -18,11 +18,14 @@ from django.contrib import admin
 from django.urls import path, include
 
 from sistema_bodega.views import saludar_con_html
-from control_empleados.views import listar_empleados
+from control_empleados.views import listar_empleados, cargar_bodega, listar_bodegas
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('empleados/', include('control_empleados.urls')),
+
+    path('alta-bodegas/', cargar_bodega),
+    path('lista-bodegas/', listar_bodegas),
     
     
 
