@@ -1,4 +1,12 @@
 # Proyecto 3 preentrega BODEGA MITO
++ INICIO DA LA BIENVENIDA A LA PAGINA
++ HAY UN NAV CON INICIO(ES LA HOME), EMPLEADOS, BODEGA y una web externa que nos lleva a la 
++ HISTORIA DEL VINO
++ EMPLEADOS 
++ BODEGAS = podemos cargar bodegas, ver todas y buscar por codigo o nombre
+
+
+
 
 ## Instrucciones instalar proyecto en local
 + Crea una carpeta contenedora madre
