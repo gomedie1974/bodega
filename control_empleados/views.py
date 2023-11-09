@@ -39,8 +39,13 @@ def cargar_empleado(request):
             data = formulario.cleaned_data  # es un diccionario
             nombre = data["nombre"]
             apellido = data["apellido"]
+            email = data["email"]
+            telefono = data["telefono"]
+            dni = data["dni"]
+            fecha_nacimiento = data["fecha_nacimiento"]
+
             # creo un curso en memoria RAM
-            empleados = Empleado(nombre=nombre, apellido=apellido)
+            empleados = Empleado(nombre=nombre, apellido=apellido, email=email, telefono=telefono, dni=dni, fecha_nacimiento=fecha_nacimiento)
             # Lo guardan en la Base de datos
             empleados.save()
 

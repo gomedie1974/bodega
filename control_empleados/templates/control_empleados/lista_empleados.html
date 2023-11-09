@@ -5,7 +5,7 @@
 {% endblock titulo %}
 
 {% block contenido %}
-<h1 style="color:orange;">
+<h1 style="color:blue;">
   Empleados
 </h1>
 <a href="{% url 'lista_empleados' %}">Ver todos</a>
@@ -20,31 +20,9 @@
 <ul>
 {% for empleado in empleados %}
   <li>
-    {{ empleado.nombre }}, {{ empleado.apellido }}
+    {{ empleado.apellido }} {{ empleado.nombre }}, {{ empleado.telefono}}
   </li>
 {% endfor %}
 </ul>  
 {% endblock contenido %}
 
-
-{% comment %} 
-{% extends "base.html" %}
-
-{% block titulo %}
-<title>Bodega MITO - Inicio</title>
-{% endblock titulo %}
-
-{% block contenido %} 
-    <h1>
-        Bienvenidos los saluda {{jefe}}
-    </h1>
-    
-    <h3>Empleados</h3>
-    <ul>
-        {% for empleado in empleados %}
-        <li>
-            {{empleado.apellido}}, {{empleado.nombre}}
-        </li>
-        {% endfor %}
-    </ul>
-{% endblock contenido %}  {% endcomment %}
