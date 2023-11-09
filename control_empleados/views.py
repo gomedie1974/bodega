@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.db.models import Q
 
-from control_empleados.models import Empleado
+from control_empleados.models import Empleado, Jefe
 
 
 # Create your views here.
@@ -10,11 +10,7 @@ from control_empleados.models import Empleado
 def listar_empleados(request):
     contexto = {
         "jefe": "Lionel",
-        "empleados": [
-            {'nombre': 'Diego', 'apellido': 'Gomez'},
-            {'nombre': 'Tomas', 'apellido': 'Duarte'},
-            {'nombre': 'Lio', 'apellido': 'Me10'},
-        ]
+        "empleados": Empleado.objects.all 
     }
     http_response = render(
         request=request,
