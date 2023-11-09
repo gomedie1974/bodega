@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.db.models import Q
-from control_empleados.forms import BodegaFormulario
+from control_empleados.forms import BodegaFormulario, EmpleadoFormulario
 from control_empleados.models import Empleado, Bodega
 
 # Create your views here.
@@ -29,25 +29,33 @@ def listar_bodegas(request):
     )
     return http_response
 
-
-""" def cargar_bodega(request):
+def cargar_empleado(request):
     if request.method == "POST":
-        # GUARDA LOS DATOS
-        data = request.POST
+        # Guardado de datos
+        # Creo un objeto formulario con la data que envio el usuario
+        formulario = EmpleadoFormulario(request.POST)
 
-        # GUARDO LA BODEGA EN LA RAM
-        bodega = Bodega(nombre=data['nombre'], codigo=data['codigo'])
+        if formulario.is_valid():
+            data = formulario.cleaned_data  # es un diccionario
+            nombre = data["nombre"]
+            apellido = data["apellido"]
+            # creo un curso en memoria RAM
+            empleados = Empleado(nombre=nombre, apellido=apellido)
+            # Lo guardan en la Base de datos
+            empleados.save()
 
-        # GUARDO LA BODEGA EN LA BASE DE DATOS
-        bodega.save()
-        url_exitosa = reverse('listar_bodegas')
-        return redirect(url_exitosa)
-    else: # GET
-        # CARGA FORMULARIO INICIAL
-        return render(
+            # Redirecciono al usuario a la lista de
+            url_exitosa = reverse('lista_empleados')  
+            return redirect(url_exitosa)
+    else:  # GET
+        # Descargar formulario inicial
+        formulario = EmpleadoFormulario()
+    http_response = render(
         request=request,
-        template_name='control_empleados/formulario_alta_bodegas.html',
-    ) """
+        template_name='control_empleados/formulario_alta_empleado.html',
+        context={'formulario': formulario}
+    )
+    return http_response
 
 def cargar_bodega(request):
     if request.method == "POST":
