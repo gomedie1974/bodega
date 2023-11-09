@@ -107,3 +107,24 @@ def buscar_bodegas(request):
             context=contexto,
         )
         return http_response
+
+def buscar_empleados(request):
+    if request.method == "POST":
+        data = request.POST
+        busqueda = data["busqueda"]
+        # Filtro simple
+        #bodegas = Bodega.objects.filter(codigo__contains=busqueda)
+        # Ejemplo filtro avanzado
+        empleados = Empleado.objects.filter(
+            Q(nombre__icontains=busqueda) | Q(apellido__contains=busqueda)
+        )
+
+        contexto = {
+            "empleados": empleados,
+        }
+        http_response = render(
+            request=request,
+            template_name='control_empleados/lista_empleados.html',
+            context=contexto,
+        )
+        return http_response
