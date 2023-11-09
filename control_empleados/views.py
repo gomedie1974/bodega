@@ -1,10 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
+from django.db.models import Q
+
+from control_empleados.models import Empleado
+
 
 # Create your views here.
 
 def listar_empleados(request):
     contexto = {
-        "jefe": "Pedro",
+        "jefe": "Lionel",
         "empleados": [
             {'nombre': 'Diego', 'apellido': 'Gomez'},
             {'nombre': 'Tomas', 'apellido': 'Duarte'},
