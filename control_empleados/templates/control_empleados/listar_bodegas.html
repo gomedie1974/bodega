@@ -17,12 +17,27 @@
   <input type="submit" value="Buscar por bodega">
 </form>
 <br>
-<ul>
+<table class="table">
+  <tbody>
+    <tr>
+      <th>Id</th>
+      <th>Codigo</th>
+      <th>Nombre</th>
+      <th></th>
+    </tr>
+  </tbody>
 {% for bodega in bodegas %}
-  <li>
-    {{ bodega.nombre }}, {{ bodega.codigo }}
-  </li>
+  <tr>
+    <tD>{{ bodega.id}}</tD>
+    <tD>{{ bodega.codigo }}</tD>
+    <tD>{{ bodega.nombre }}</tD>
+    <tD>
+      <form action="{% url 'eliminar_bodega' bodega.id %}" method='post'>
+        {%csrf_token%}
+        <input type='submit' class='btn btn-link' value='borrar'/>
+      </form>
+    </tD>
+   </tr>
+  
 {% endfor %}
-</ul>
-{% endblock contenido %}
- 
+</table>  {% endblock contenido %}

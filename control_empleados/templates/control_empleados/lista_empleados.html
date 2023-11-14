@@ -17,12 +17,40 @@
   <input type="submit" value="Buscar por empleado">
 </form>
 <br>
-<ul>
+<table class="table">
+  <tbody>
+    <tr>
+      <th>Id</th>
+      <th>Apellido</th>
+      <th>Nombre</th>
+      <th>Telefono</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </tbody>
 {% for empleado in empleados %}
-  <li>
-    {{ empleado.apellido }} {{ empleado.nombre }}, {{ empleado.telefono}}
-  </li>
+  <tr>
+    <tD>{{ empleado.id}}</tD>
+    <tD>{{ empleado.apellido }}</tD>
+    <tD>{{ empleado.nombre }}</tD>
+    <tD>{{ empleado.telefono }}</tD>
+    <tD>
+      <form action="{% url 'editar_empleado' empleado.id %}" >
+        {%csrf_token%}
+        <input type='submit' class='btn btn-link' value='editar'/>
+      </form>
+    </tD>
+    <tD>
+      <form action="{% url 'eliminar_empleado' empleado.id %}" method='post'>
+        {%csrf_token%}
+        <input type='submit' class='btn btn-link' value='borrar'/>
+      </form>
+    </tD>
+    
+     
+  </tr>
+  
 {% endfor %}
-</ul>  
+</table>  
 {% endblock contenido %}
 

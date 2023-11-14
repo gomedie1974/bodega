@@ -4,11 +4,13 @@ from django.db.models import Q
 from control_empleados.forms import BodegaFormulario, EmpleadoFormulario
 from control_empleados.models import Empleado, Bodega
 
+
 # Create your views here.
 
 def listar_empleados(request):
     contexto = {
         "jefe": "Lionel",
+        #obtiene todos los datos de la base de tados Empleado
         "empleados": Empleado.objects.all 
     }
     http_response = render(
@@ -61,6 +63,54 @@ def cargar_empleado(request):
         context={'formulario': formulario}
     )
     return http_response
+
+def editar_empleado(request, id):
+    empleado = Empleado.objects.get(id=id)
+    if request.method == "POST":
+        formulario = EmpleadoFormulario(request.POST)
+
+        if formulario.is_valid():
+            data = formulario.cleaned_data  # es un diccionario
+            empleado.nombre = data["nombre"]
+            empleado.apellido = data["apellido"]
+            empleado.email = data["email"]
+            empleado.telefono = data["telefono"]
+            empleado.dni = data["dni"]
+            empleado.fecha_nacimiento = data["fecha_nacimiento"]
+            empleado.save()
+
+            url_exitosa = reverse('lista_empleados')  
+            return redirect(url_exitosa)
+        
+    
+    else:  # GET
+        inicial = {
+            'nombre' : empleado.nombre,
+            'apellido' : empleado.apellido,
+            'email' : empleado.email,
+            'telefono' : empleado.telefono,
+            'dni' : empleado.dni,
+            'fecha_nacimiento' : empleado.fecha_nacimiento,
+        }
+        formulario = EmpleadoFormulario(initial=inicial)
+    return render(
+        request=request,
+        template_name='control_empleados/formulario_alta_empleado.html',
+        context={'formulario': formulario},
+    )
+
+
+    
+def eliminar_empleado(request, id):
+    #obtengo el empleados de la BD
+    empleado = Empleado.objects.get(id=id)
+    if request.method == 'POST':
+        #borra el empleado de la BD
+        empleado.delete()
+        #redireccionamos a la URL exitosa
+        url_exitosa = reverse('lista_empleados')
+        return redirect(url_exitosa)
+
 
 def cargar_bodega(request):
     if request.method == "POST":
@@ -133,3 +183,13 @@ def buscar_empleados(request):
             context=contexto,
         )
         return http_response
+
+
+def eliminar_bodega(request, id):
+    bodega = Bodega.objects.get(id=id)
+    if request.method == 'POST':
+        bodega.delete()
+        #redireccionamos a la URL exitosa
+        url_exitosa = reverse('listar_bodegas')
+        return redirect(url_exitosa)
+        
