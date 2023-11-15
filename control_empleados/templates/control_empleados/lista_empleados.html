@@ -1,5 +1,52 @@
 {% extends "base.html" %}
 
+{% block contenido %}
+<section>
+ <div>
+   <h1>Lista de empleados</h1>
+   <a href="{% url 'cargar_empleado' %}">Crear empleado</a>
+   <br>
+
+   <table class="table">
+     <tbody>
+       <tr>
+         <th>ID</th>
+         <th>Nombre</th>
+         <th>Apellido</th>
+         
+         <td></td>
+         <td></td>
+         <td></td>
+       </tr>
+       {% for empleado in object_list %}
+       <tr>
+         <td>{{ empleado.id }}</td>
+         <td>{{ empleado.nombre }}</td>
+         <td>{{ empleado.apellido }}</td>
+         <td>
+          <a href="{% url 'ver_empleados' empleado.id %}">Ver</a>
+        </td>
+         <td>
+           <a href="{% url 'editar_empleado' empleado.id %}">Editar</a>
+         </td>
+         <td>
+           <a href="{% url 'eliminar_empleado' empleado.id %}">
+             <i class="bi bi-trash"></i>
+           </a>
+         </td>
+       </tr>
+       {% endfor %}
+     </tbody>
+   </table>
+
+ </div>
+</section>
+{% endblock contenido %}
+
+
+
+{% comment %} {% extends "base.html" %}
+
 {% block titulo %}
 <title>Bodega MITO - Empleados</title>
 {% endblock titulo %}
@@ -28,7 +75,7 @@
       <th></th>
     </tr>
   </tbody>
-{% for empleado in empleados %}
+{% for empleado in object_list %}
   <tr>
     <tD>{{ empleado.id}}</tD>
     <tD>{{ empleado.apellido }}</tD>
@@ -54,3 +101,4 @@
 </table>  
 {% endblock contenido %}
 
+ {% endcomment %}

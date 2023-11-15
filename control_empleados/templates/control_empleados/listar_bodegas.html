@@ -1,4 +1,51 @@
- {% extends "base.html" %}
+{% extends "base.html" %}
+
+{% block contenido %}
+<section>
+ <div>
+   <h1>Lista de bodegas</h1>
+   <a href="{% url 'cargar_bodega' %}">Crear bodega</a>
+   <br>
+
+   <table class="table">
+     <tbody>
+       <tr>
+         <th>ID</th>
+         <th>Nombre</th>
+         <th>Codgio</th>
+         
+         <td></td>
+         <td></td>
+         <td></td>
+       </tr>
+       {% for bodega in object_list %}
+       <tr>
+         <td>{{ bodega.id }}</td>
+         <td>{{ bodega.nombre }}</td>
+         <td>{{ bodega.codigo }}</td>
+         <td>
+          <a href="{% url 'ver_bodegas' bodega.id %}">Ver</a>
+        </td>
+         <td>
+           <a href="{% url 'editar_bodegas' bodega.id %}">Editar</a>
+         </td>
+         <td>
+           <a href="{% url 'eliminar_bodegas' bodega.id %}">
+             <i class="bi bi-trash"></i>
+           </a>
+         </td>
+       </tr>
+       {% endfor %}
+     </tbody>
+   </table>
+
+ </div>
+</section>
+{% endblock contenido %}
+
+
+{% comment %} 
+{% extends "base.html" %}
 
 {% block titulo %}
 <title>Bodega MITO - Bodegas</title>
@@ -24,6 +71,7 @@
       <th>Codigo</th>
       <th>Nombre</th>
       <th></th>
+      <th></th>
     </tr>
   </tbody>
 {% for bodega in bodegas %}
@@ -31,6 +79,12 @@
     <tD>{{ bodega.id}}</tD>
     <tD>{{ bodega.codigo }}</tD>
     <tD>{{ bodega.nombre }}</tD>
+    <tD>
+      <form action="{% url 'editar_bodega' bodega.id %}" >
+        {%csrf_token%}
+        <input type='submit' class='btn btn-link' value='editar'/>
+      </form>
+    </tD>
     <tD>
       <form action="{% url 'eliminar_bodega' bodega.id %}" method='post'>
         {%csrf_token%}
@@ -41,3 +95,4 @@
   
 {% endfor %}
 </table>  {% endblock contenido %}
+ {% endcomment %}
