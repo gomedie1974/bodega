@@ -23,6 +23,7 @@ from control_empleados.views import listar_empleados
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('empleados/', include('control_empleados.urls')),
+    path('perfiles/', include('perfiles.urls')),
 
     
     path("", saludar_con_html, name='inicio'),

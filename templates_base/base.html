@@ -23,11 +23,16 @@
         <!-- Navigation (header)-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="navbar-brand" href="{% url 'inicio' %}" >Inicio</a>
+                <a class="navbar-brand" style="color: red;" href="{% url 'inicio' %}" >Inicio</a>
                 <a class="navbar-brand" href="{% url 'listar_bodegas' %}">Bodegas</a>
                 <a class="navbar-brand" href="{% url 'lista_empleados' %}">Empleados</a>
-                 <a class="navbar-brand" href="https://es.wikipedia.org/wiki/Historia_del_vino">Historia del vino</a>
-                <!-- <a class="btn btn-primary" href="#signup">INICIAR</a> -->
+                {% if user.is_authenticated %}
+                <a class="navbar-brand" href="{% url 'logout' %}">Cierre sesión</a> 
+                {% else %}
+                <a class="btn btn-primary" href="{% url 'login' %}">Inicio sesión</a> 
+                <a class="navbar-brand" href="{% url 'registro' %}">Registro</a> 
+                {% endif %}
+                <a class="navbar-brand" href="https://es.wikipedia.org/wiki/Historia_del_vino">Historia del vino</a> 
             </div>
         </nav>
 

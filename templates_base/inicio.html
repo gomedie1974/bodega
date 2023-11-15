@@ -2,11 +2,14 @@
 
 {% block titulo %}
 <title>Bodega MITO - Inicio</title>
-
 {% endblock titulo %}
 
 {% block contenido %}
-<h1 style="color: rgb(37, 37, 78);"><img style="width: 15%;" src="../static/assets/mito.jpg" alt=""><b>Bienvenidos a la Bodega MITO</b></h1>
+{% if user.is_authenticated %}
+<h1 style="color: rgb(37, 37, 78);"><img style="width: 15%;" src="../static/assets/mito.jpg" alt=""><b>Bienvenido/a {{user.last_name}},{{user.first_name}} a Bodega MITO</b></h1>
+{% else %}
+<h1 style="color: rgb(37, 37, 78);"><img style="width: 15%;" src="../static/assets/mito.jpg" alt=""><b>Bienvenido/a visitante a Bodega MITO</b></h1>
+{% endif %}
 <h5> <br>
     MITO es un espacio de casi 300 metros cuadrados dedicados al vino y otras bebidas.<br><br>
     En la vinoteca contamos con una destacada variedad de bodegas de la mayoría de las regiones vitivinícolas de la Argentina.<br><br>
